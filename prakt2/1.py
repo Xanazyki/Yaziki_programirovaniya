@@ -14,5 +14,23 @@ def add(a, b):
     return a + b
 
 @logger
-def greet(name, greeting="Hello"):
-    return f"{greeting}, {name}!"
+def divide(a, b):
+    if b != 0:
+        return a/b
+    return "На ноль делить нельзя"
+
+@logger
+def greet(name):
+    return f"Привет, {name}!"
+
+r1 = add(12, 9)
+print(f"Add: {r1}")
+
+r2 = divide(100, 10)
+print(f"divide: {r2}")
+
+r3 = divide(100, 0)
+print(f"divide: {r3}")
+
+r4 = greet('Михаил')
+print(f'greet: {r4}')
