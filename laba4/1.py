@@ -11,4 +11,4 @@ class Transport:
 
 car = Transport("Kia", 130)
 print(car)      
-car.move()     
+car.move()

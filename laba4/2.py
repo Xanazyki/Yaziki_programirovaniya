@@ -34,12 +34,14 @@ class Bike(Transport):
     def __str__(self):
         return f"Bike: {self.brand}, Speed: {self.speed}, Type: {self.type}"
 
-car = Car("Kia", 130, 5)
-bike = Bike("BMW", 25, "road")
+car1 = Car("Kia", 130, 5)
+car2 = Car("Mercedes", 120, 6)
+bike1 = Bike("BMW", 25, "road")
+bike2 = Bike("123", 30, "road")
 
-print(car)
-car.move()
-car.honk()
+print(car1)
+car1.move()
+car1.honk()
 
-print(bike)   
-bike.move()
+print(bike1)   
+bike1.move()

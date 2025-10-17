@@ -53,29 +53,32 @@ print(car1)
 print(car2)     
 print(bike)      
 
-print('\n')
-transport.move() 
-car1.move()       
-car2.move()      
-bike.move()      
+# print('\n')
+# transport.move() 
+# car1.move()       
+# car2.move()      
+# bike.move()      
 
-print('\n')
-car1.honk()      
-car2.honk()      
+# print('\n')
+# car1.honk()      
+# car2.honk()      
 
-print('\n')
-print(f"В машине {car1.brand} мест: {len(car1)}")  
+# print('\n')
+# print(f"В машине {car1.brand} мест: {len(car1)}")  
 
-print('\n')
-print(f"car1 == car2: {car1 == car2}") 
+# print('\n')
+# print(f"car1 == car2: {car1 == car2}") 
 
-print('\n')
-total_speed = car1 + car2
-print(f"Суммарная скорость: {total_speed} km/h") 
+# print('\n')
+# total_speed = car1 + car2
+# print(f"Суммарная скорость: {total_speed} km/h") 
 
-print('\n')
-try:
-    result = car1 + bike
-    print(f"Результат: {result}")
-except Exception as e:
-    print(f"Ошибка: {type(e).__name__}: {e}")
+# print('\n')
+# try:
+#     result = car1 + bike
+#     print(f"Результат: {result}")
+# except Exception as e:
+#     print(f"Ошибка: {type(e).__name__}: {e}")
+
+result = car1 + bike
+print(result)
