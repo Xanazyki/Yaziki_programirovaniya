@@ -40,7 +40,7 @@ def view_content(user, content):
 
 
 for user in users:
-    print(f"🧑 Пользователь: {user['name']} (роль: {user['role']})")
+    print(f"Пользователь: {user['name']} (роль: {user['role']})")
     
     print("Просмотр контента:")
     view_content(user, "главная страница")
@@ -53,5 +53,3 @@ for user in users:
     
     print("Удаление базы данных:")
     delete_database(user)
-    
-    print("\n" + "=" * 50 + "\n")
