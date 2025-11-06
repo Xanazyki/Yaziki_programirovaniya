@@ -1,3 +1,5 @@
+from datetime import datetime
+
 class Task:
     def __init__(self, id, title, description='', status='pending', priority='medium', created_date=None, completed_date=None):
         self.id = id
@@ -5,7 +7,7 @@ class Task:
         self.description = description
         self.status = status
         self.priority = priority
-        self.created_date = created_date
+        self.created_date = created_date or datetime.now().isoformat()
         self.completed_date = completed_date
 
     def to_dict(self):
@@ -31,5 +33,24 @@ class Task:
             completed_date=data.get('completed_date')
         )
     
+    def mark_completed(self):
+        self.status = 'completed'
+        self.completed_date = datetime.now().isoformat()
+    
     def __str__(self):
-        return f'{self.id}. {self.title} [{self.status}]'
+        status_display = '[X]' if self.status == 'completed' else '[ ]'
+        return f'{self.id:3d}. {status_display} {self.title} ({self.priority})'
+
+    def detailed_str(self):
+        status_display = 'выполнена' if self.status == 'completed' else 'не выполнена'
+
+        created = datetime.fromisoformat(self.created_date).strftime('%d.%m.%Y %H:%M')
+        completed = ''
+        if self.completed_date:
+            completed = f'\n Завершена: {datetime.fromisoformat(self.completed_date).strftime('%d.%m.%Y %H:%M')}'
+
+        return f"""{self.id:3d}. {self.title}
+    Описание: {self.description or 'нет'}
+    Статус: {status_display}
+    Приоритет: {self.priority}
+    Создана: {created}{completed}"""
