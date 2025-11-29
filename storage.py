@@ -1,7 +1,7 @@
 import json
 import os
 from typing import List, Optional
-from .models import Task, TaskStatus, Priority
+from models import Task, TaskStatus, Priority
 
 
 class TaskStorage:

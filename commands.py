@@ -1,7 +1,7 @@
 import argparse
 from typing import List
-from .storage import TaskStorage
-from .models import Task, TaskStatus, Priority
+from storage import TaskStorage
+from models import Task, TaskStatus, Priority
 
 
 class TaskCommands:
