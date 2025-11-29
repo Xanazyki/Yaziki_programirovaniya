@@ -1,12 +1,18 @@
+"""
+Главный модуль консольного менеджера задач.
+
+Точка входа приложения, обрабатывает аргументы командной строки
+и запускает соответствующие команды.
+"""
+
 import sys
 import os
-
 from commands import TaskCommands
 from storage import TaskStorage
 
 
 def main():
-    """Основная функция приложения"""
+    """Основная функция приложения."""
     storage = TaskStorage()
     commands = TaskCommands(storage)
     

@@ -1,3 +1,9 @@
+"""
+Модуль обработки команд для менеджера задач.
+
+Содержит класс для обработки аргументов командной строки и выполнения команд.
+"""
+
 import argparse
 from typing import List
 from storage import TaskStorage
@@ -5,12 +11,33 @@ from models import Task, TaskStatus, Priority
 
 
 class TaskCommands:
+    """Класс для обработки команд менеджера задач.
+    
+    Attributes:
+        storage (TaskStorage): Объект для работы с хранилищем задач.
+    """
+    
     def __init__(self, storage: TaskStorage):
+        """Инициализирует обработчик команд.
+        
+        Args:
+            storage (TaskStorage): Объект хранилища задач.
+        """
         self.storage = storage
 
     def add_task(self, title: str, description: str = "", 
                 priority: str = "medium", due_date: str = None) -> str:
-        """Добавляет новую задачу"""
+        """Добавляет новую задачу.
+        
+        Args:
+            title (str): Название задачи.
+            description (str, optional): Описание задачи. По умолчанию "".
+            priority (str, optional): Приоритет задачи. По умолчанию "medium".
+            due_date (str, optional): Срок выполнения. По умолчанию None.
+            
+        Returns:
+            str: Сообщение о результате операции.
+        """
         try:
             priority_enum = Priority(priority.lower())
         except ValueError:
@@ -22,7 +49,17 @@ class TaskCommands:
 
     def list_tasks(self, status: str = None, priority: str = None, 
                   due_date: str = None, show_all: bool = False) -> str:
-        """Показывает список задач с фильтрацией"""
+        """Показывает список задач с фильтрацией.
+        
+        Args:
+            status (str, optional): Фильтр по статусу. По умолчанию None.
+            priority (str, optional): Фильтр по приоритету. По умолчанию None.
+            due_date (str, optional): Фильтр по сроку. По умолчанию None.
+            show_all (bool, optional): Показать все задачи. По умолчанию False.
+            
+        Returns:
+            str: Отформатированный список задач.
+        """
         if show_all:
             tasks = self.storage.get_all_tasks()
         else:
@@ -45,7 +82,14 @@ class TaskCommands:
         return "\n\n".join(result)
 
     def complete_task(self, task_id: int) -> str:
-        """Отмечает задачу как выполненную"""
+        """Отмечает задачу как выполненную.
+        
+        Args:
+            task_id (int): ID задачи для завершения.
+            
+        Returns:
+            str: Сообщение о результате операции.
+        """
         task = self.storage.get_task_by_id(task_id)
         if not task:
             return f"Ошибка: Задача с ID {task_id} не найдена"
@@ -58,14 +102,25 @@ class TaskCommands:
         return f"Задача {task_id} отмечена как выполненная"
 
     def delete_task(self, task_id: int) -> str:
-        """Удаляет задачу"""
+        """Удаляет задачу.
+        
+        Args:
+            task_id (int): ID задачи для удаления.
+            
+        Returns:
+            str: Сообщение о результате операции.
+        """
         if self.storage.delete_task(task_id):
             return f"Задача {task_id} удалена"
         else:
             return f"Ошибка: Задача с ID {task_id} не найдена"
 
     def setup_argparse(self):
-        """Настраивает парсер аргументов командной строки"""
+        """Настраивает парсер аргументов командной строки.
+        
+        Returns:
+            argparse.ArgumentParser: Настроенный парсер аргументов.
+        """
         parser = argparse.ArgumentParser(description='Консольный менеджер задач')
         subparsers = parser.add_subparsers(dest='command', help='Доступные команды')
 
@@ -94,7 +149,14 @@ class TaskCommands:
         return parser
 
     def execute_command(self, args):
-        """Выполняет команду на основе аргументов"""
+        """Выполняет команду на основе аргументов.
+        
+        Args:
+            args: Аргументы командной строки.
+            
+        Returns:
+            str: Результат выполнения команды.
+        """
         if args.command == 'add':
             return self.add_task(
                 title=args.title,
